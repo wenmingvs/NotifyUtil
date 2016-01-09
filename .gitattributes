@@ -1,0 +1,16 @@
+# Normalize the line endings, Unix(Unix-Like) project.
+
+* text eol=lf
+
+*.java text
+*.xml text
+
+*.png binary
+*.jpg binary
+*.jar binary
+*.so binary
+*.zip binary
+*.mt binary
+*.ftr binary
+*.ttf binary
+344 binary
