@@ -14,9 +14,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RemoteViews;
 
+import com.wenming.library.NotifyUtil;
 import com.wenming.notify.R;
 import com.wenming.notify.activity.OtherActivity;
 import com.wenming.notify.adapter.MyAdapter;
+import com.wenming.notify.bean.NotifyBean;
 
 import java.util.ArrayList;
 
@@ -31,7 +33,7 @@ public class OneFragment extends Fragment {
     private Context mContext;
     private View mView;
     private NotifyUtil currentNotify;
-    private ArrayList<Notifybean> mDataList;
+    private ArrayList<NotifyBean> mDataList;
     private ListView mListView;
     private PhotoView mScaleImage;
     private int requestCode = (int) SystemClock.uptimeMillis();
@@ -107,47 +109,47 @@ public class OneFragment extends Fragment {
 
     private void initDatas() {
         mDataList = new ArrayList<>();
-        Notifybean notifybean1 = new Notifybean();
+        NotifyBean notifybean1 = new NotifyBean();
         notifybean1.setImageId(R.drawable.tb_bigicon);
         notifybean1.setTitleId(R.string.title1);
         notifybean1.setTypeId(R.string.type1);
         mDataList.add(notifybean1);
-        Notifybean notifybean2 = new Notifybean();
+        NotifyBean notifybean2 = new NotifyBean();
         notifybean2.setImageId(R.drawable.netease_bigicon);
         notifybean2.setTitleId(R.string.title2);
         notifybean2.setTypeId(R.string.type2);
         mDataList.add(notifybean2);
-        Notifybean notifybean3 = new Notifybean();
+        NotifyBean notifybean3 = new NotifyBean();
         notifybean3.setImageId(R.drawable.weixin);
         notifybean3.setTitleId(R.string.title3);
         notifybean3.setTypeId(R.string.type3);
         mDataList.add(notifybean3);
-        Notifybean notifybean4 = new Notifybean();
+        NotifyBean notifybean4 = new NotifyBean();
         notifybean4.setImageId(R.drawable.xc_smaillicon);
         notifybean4.setTitleId(R.string.title4);
         notifybean4.setTypeId(R.string.type4);
         mDataList.add(notifybean4);
-        Notifybean notifybean5 = new Notifybean();
+        NotifyBean notifybean5 = new NotifyBean();
         notifybean5.setImageId(R.drawable.yybao_smaillicon);
         notifybean5.setTitleId(R.string.title5);
         notifybean5.setTypeId(R.string.type5);
         mDataList.add(notifybean5);
-        Notifybean notifybean6 = new Notifybean();
+        NotifyBean notifybean6 = new NotifyBean();
         notifybean6.setImageId(R.drawable.android_bigicon);
         notifybean6.setTitleId(R.string.title6);
         notifybean6.setTypeId(R.string.type6);
         mDataList.add(notifybean6);
-        Notifybean notifybean7 = new Notifybean();
+        NotifyBean notifybean7 = new NotifyBean();
         notifybean7.setImageId(R.drawable.android_bigicon);
         notifybean7.setTitleId(R.string.title7);
         notifybean7.setTypeId(R.string.type7);
         mDataList.add(notifybean7);
-        Notifybean notifybean8 = new Notifybean();
+        NotifyBean notifybean8 = new NotifyBean();
         notifybean8.setImageId(R.drawable.hl_smallicon);
         notifybean8.setTitleId(R.string.title8);
         notifybean8.setTypeId(R.string.type8);
         mDataList.add(notifybean8);
-        Notifybean notifybean9 = new Notifybean();
+        NotifyBean notifybean9 = new NotifyBean();
         notifybean9.setImageId(R.drawable.myicon);
         notifybean9.setTitleId(R.string.title9);
         notifybean9.setTypeId(R.string.title9);
