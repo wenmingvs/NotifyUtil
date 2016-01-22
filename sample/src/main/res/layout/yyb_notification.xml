@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#1A1A1A">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="8dp"
+        android:src="@drawable/yybao_bigicon" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text"
+        android:layout_alignTop="@+id/image"
+        android:text="垃圾安装包太多"
+        android:textColor="#A4A4A4"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="4dip"
+        android:layout_toLeftOf="@+id/button"
+        android:layout_toRightOf="@id/image"
+        android:text="3个无用安装包，清理释放的空间"
+        android:textColor="#A4A4A4"
+        android:textSize="14sp" />
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="55dp"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="12dp"
+        android:background="#008FE8"
+        android:gravity="center"
+        android:text="立即清理"
+        android:textColor="#C8EBFC"
+        android:textSize="11sp" />
+
+</RelativeLayout>

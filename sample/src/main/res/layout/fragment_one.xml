@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="工具类的使用，请查看下图，调用NotifyUtil对应的方法即可"
+        android:textColor="#808080"
+        android:textSize="12sp" />
+
+    <uk.co.senab.photoview.PhotoView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scaleImage"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_gravity="top"
+        android:background="#23241F"
+        android:scaleType="centerInside"
+        android:src="@drawable/image1" />
+
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"></ListView>
+
+
+</LinearLayout>

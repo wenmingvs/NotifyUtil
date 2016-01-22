@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">NotifyDemo</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="tab1">App是否后台方法</string>
+    <string name="tab2">通知的样式</string>
+    <string name="tab3">关于我</string>
+
+
+    <string name="type1">普通类型通知(单行)</string>
+    <string name="type2">普通类型通知(多行)</string>
+    <string name="type3">消息列表通知(含双图标)</string>
+    <string name="type4">含大图类型通知</string>
+    <string name="type5">自定义视图通知</string>
+    <string name="type6">折叠式双按钮通知</string>
+    <string name="type7">进度条通知</string>
+    <string name="type8">Android 5.0 新特性</string>
+    <string name="type9"></string>
+
+
+    <string name="title1">淘宝样式</string>
+    <string name="title2">网易新闻样式</string>
+    <string name="title3">微信消息样式</string>
+    <string name="title4">系统截图通知样式</string>
+    <string name="title5">应用宝样式</string>
+    <string name="title6">Android系统更新样式</string>
+    <string name="title7">Android系统下载样式</string>
+    <string name="title8">Heads-up 样式</string>
+    <string name="title9">清空通知</string>
+
+
+</resources>
