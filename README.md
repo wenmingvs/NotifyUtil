@@ -27,6 +27,7 @@ NotifyDemo Android App, require Android 4.0+, GPL v3 License
         String title = "双十一大优惠！！！";
         String content = "仿真皮肤充气娃娃，女朋友带回家！";
 ```
+  
 2. 实例化工具类，并且调用对应方法即可
 ``` java
  NotifyUtil notify1 = new NotifyUtil(mContext, 1);
