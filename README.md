@@ -14,7 +14,7 @@ NotifyDemo Android App, require Android 4.0+, GPL v3 License
 用法：
 -----
 
-1.. 填充想要展示的内容
+1. 填充想要展示的内容
 ``` java
         Intent intent = new Intent(mContext, OtherActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -25,7 +25,8 @@ NotifyDemo Android App, require Android 4.0+, GPL v3 License
         String title = "双十一大优惠！！！";
         String content = "仿真皮肤充气娃娃，女朋友带回家！";
 ```
-3. 实例化工具类，并且调用对应方法即可
+  
+2. 实例化工具类，并且调用对应方法即可
 ``` java
  NotifyUtil notify1 = new NotifyUtil(mContext, 1);
  notify1.notify_normal_singline(pIntent, smallIcon, ticker, title, content, true, true, false);
