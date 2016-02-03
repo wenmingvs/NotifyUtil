@@ -4,7 +4,8 @@
 **高仿淘宝，网易新闻，微信，应用宝，环聊等等热门App的通知视图，并且完通知工具类的封装，提供多达8种最常见的App通知接口,支持Android 5.0悬浮式通知样式，欢迎大家star我的新的项目**
 
 NotifyDemo Android App, require Android 4.0+, GPL v3 License  
-[Download Link ](http://pan.baidu.com/s/1jHiusgm)  
+
+[Download Link ](https://github.com/wenmingvs/NotifyUtil/raw/master/sample-debug.apk)  
 
 八种通知类型的展示
 ------
