@@ -55,7 +55,6 @@ public class NotifyUtil {
 //                requestCode, intent, FLAG);
 
         cBuilder.setContentIntent(pendingIntent);// 该通知要启动的Intent
-
         cBuilder.setSmallIcon(smallIcon);// 设置顶部状态栏的小图标
         cBuilder.setTicker(ticker);// 在顶部状态栏中的提示信息
 
@@ -111,7 +110,10 @@ public class NotifyUtil {
 //        PendingIntent pIntent = PendingIntent.getActivity(mContext,
 //                requestCode, intent, FLAG);
         nBuilder.setContentIntent(pendingIntent);
+
         nBuilder.setSmallIcon(smallIcon);
+
+
         nBuilder.setTicker(ticker);
         nBuilder.setWhen(System.currentTimeMillis());
         nBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
