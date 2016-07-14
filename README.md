@@ -5,11 +5,10 @@
 
 NotifyDemo Android App, require Android 4.0+, GPL v3 License  
 
-[Download Link ](https://github.com/wenmingvs/NotifyUtil/raw/master/sample-debug.apk)  
+快速下载体验
+-----
 
-八种通知类型的展示
-------
-![enter image description here](http://ww1.sinaimg.cn/large/691cc151gw1f07gtdxy53g20bc0h01l1.gif)
+[百度网盘](https://github.com/wenmingvs/NotifyUtil/raw/master/sample-debug.apk)
 
 
 用法：
