@@ -3,6 +3,7 @@ package com.wenming.library;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -24,7 +25,7 @@ public class NotifyUtil {
     private int NOTIFICATION_ID;
     private NotificationManager nm;
     private Notification notification;
-    private NotificationCompat.Builder cBuilder;
+    private Notification.Builder cBuilder;
     private Notification.Builder nBuilder;
     private Context mContext;
 
@@ -33,9 +34,8 @@ public class NotifyUtil {
         this.NOTIFICATION_ID = ID;
         mContext = context;
         // 获取系统服务来初始化对象
-        nm = (NotificationManager) mContext
-                .getSystemService(Activity.NOTIFICATION_SERVICE);
-        cBuilder = new NotificationCompat.Builder(mContext);
+        nm = (NotificationManager) mContext.getSystemService(Activity.NOTIFICATION_SERVICE);
+        cBuilder = new Notification.Builder(mContext);
     }
 
     /**
@@ -73,7 +73,7 @@ public class NotifyUtil {
          * 从Android4.1开始，可以通过以下方法，设置notification的优先级，
 		 * 优先级越高的，通知排的越靠前，优先级低的，不会在手机最顶部的状态栏显示图标
 		 */
-        cBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
+        cBuilder.setPriority(Notification.PRIORITY_MAX);
         /*
          * Notification.DEFAULT_ALL：铃声、闪光、震动均系统默认。
 		 * Notification.DEFAULT_SOUND：系统默认铃声。
@@ -189,7 +189,7 @@ public class NotifyUtil {
 
         // 设置通知样式为收件箱样式,在通知中心中两指往外拉动，就能出线更多内容，但是很少见
         //cBuilder.setNumber(messageList.size());
-        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+        Notification.InboxStyle inboxStyle = new Notification.InboxStyle();
         for (String msg : messageList) {
             inboxStyle.addLine(msg);
         }
@@ -296,8 +296,20 @@ public class NotifyUtil {
     public void notify_bigPic(PendingIntent pendingIntent, int smallIcon, String ticker,
                               String title, String content, int bigPic, boolean sound, boolean vibrate, boolean lights) {
 
+        if(Build.VERSION.SDK_INT >= 26) {
+            //当sdk版本大于26
+            String id = "channel_1";
+            String description = "143";
+            int importance = NotificationManager.IMPORTANCE_LOW;
+            NotificationChannel channel = new NotificationChannel(id, description, importance);
+//                     channel.enableLights(true);
+//                     channel.enableVibration(true);
+            nm.createNotificationChannel(channel);
+            cBuilder.setCategory(Notification.CATEGORY_MESSAGE);
+        }
+
         setCompatBuilder(pendingIntent, smallIcon, ticker, title, null, sound, vibrate, lights);
-        NotificationCompat.BigPictureStyle picStyle = new NotificationCompat.BigPictureStyle();
+        Notification.BigPictureStyle picStyle = new Notification.BigPictureStyle();
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = true;
         options.inSampleSize = 2;
