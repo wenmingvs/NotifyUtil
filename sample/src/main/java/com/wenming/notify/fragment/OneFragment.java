@@ -75,8 +75,7 @@ public class OneFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-//                        notify_normal_singLine();
-                        notiTest();
+                        notify_normal_singLine();
                         mScaleImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.image1));
                         break;
                     case 1:
@@ -202,7 +201,7 @@ public class OneFragment extends Fragment {
         String content = "据台湾“中央社”报道，国民党主席朱立伦今天(18日)向中常会报告，为败选请辞党主席一职，他感谢各位中常委的指教包容，也宣布未来党务工作由副主席黄敏惠暂代，完成未来所有补选工作。";
         //实例化工具类，并且调用接口
         NotifyUtil notify2 = new NotifyUtil(mContext, 2);
-        notify2.notify_normail_moreline(pIntent, smallIcon, ticker, title, content, true, true, false);
+        notify2.notify_normal_multiline(pIntent, smallIcon, ticker, title, content, true, true, false);
         currentNotify = notify2;
     }
 
@@ -252,7 +251,10 @@ public class OneFragment extends Fragment {
         currentNotify = notify4;
     }
 
-    private void  notiTest() {
+    /**
+     * 此方法可作为简单测试使用
+     */
+    private void notifyTest() {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.baidu.com"));
         PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, intent, 0);
         NotificationManager manager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
@@ -272,7 +274,7 @@ public class OneFragment extends Fragment {
 
             String id = "channel_1";
             String description = "143";
-            int importance = NotificationManager.IMPORTANCE_LOW;
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(id, description, importance);
             channel.enableLights(true);
             channel.enableVibration(true);
