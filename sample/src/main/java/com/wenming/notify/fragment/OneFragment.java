@@ -14,6 +14,9 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -279,11 +282,16 @@ public class OneFragment extends Fragment {
             channel.enableLights(true);
             channel.enableVibration(true);
             manager.createNotificationChannel(channel);
+
+            //设置字体颜色span
+            SpannableStringBuilder ssb = new SpannableStringBuilder("This is a content title");
+            ssb.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)), 0, 7, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
             notification = new Notification.Builder(getActivity(), id)
                     .setCategory(Notification.CATEGORY_MESSAGE)
                     .setSmallIcon(R.mipmap.ic_launcher)
-                    .setContentTitle("This is a content title")
-                    .setContentText("This is a content text")
+                    .setContentTitle(ssb)
+                    .setContentText(ssb)
                     .setContentIntent(pendingIntent)
                     .setAutoCancel(true)
                     .setStyle(picStyle)
