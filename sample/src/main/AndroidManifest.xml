@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.wenming.notify">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/MyMaterialTheme">
+        android:theme="@style/MyMaterialTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="com.wenming.notify.activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +22,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.OtherActivity"></activity>
+        <activity android:name=".activity.OtherActivity" />
+        <activity
+            android:name=".notification.LaunchActivity"
+            android:launchMode="singleTask" />
+
+        <service
+            android:name=".notification.NotificationService"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@
     <string name="tab1">App是否后台方法</string>
     <string name="tab2">通知的样式</string>
     <string name="tab3">关于我</string>
+    <string name="tab4">各种通知</string>
 
 
     <string name="type1">普通类型通知(单行)</string>
@@ -28,6 +29,12 @@
     <string name="title7">Android系统下载样式</string>
     <string name="title8">Heads-up 样式</string>
     <string name="title9">清空通知</string>
+
+    <string name="channel_critical">Critical events</string>
+    <string name="channel_importance">Importance events</string>
+    <string name="channel_default">Default events</string>
+    <string name="channel_low">Low events</string>
+    <string name="channel_media">Media events</string>
 
 
 </resources>
