@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/iv_content_big"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/custom_view_picture_placeholder" />
+
+    <LinearLayout
+        android:id="@+id/ll_title_and_summery"
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_toStartOf="@+id/iv_cancel_big"
+        android:layout_toLeftOf="@+id/iv_cancel_big"
+        android:layout_toEndOf="@+id/iv_content_big"
+        android:layout_toRightOf="@+id/iv_content_big"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title_big"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="title"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_summery_big"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="summery"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_cancel_big"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_delete" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_title_and_summery"
+        android:layout_toEndOf="@id/iv_content_big"
+        android:layout_toRightOf="@id/iv_content_big"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_love_big"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="8dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_love" />
+
+        <ImageView
+            android:id="@+id/iv_pre_big"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="8dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_pre" />
+
+        <ImageView
+            android:id="@+id/iv_play_or_pause_big"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="8dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_pause" />
+
+        <ImageView
+            android:id="@+id/iv_next_big"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="8dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_next" />
+
+        <ImageView
+            android:id="@+id/iv_lyrics_big"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="8dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_lyc" />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,12 +1,22 @@
 package com.wenming.notify.fragment;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +33,8 @@ import com.wenming.notify.bean.NotifyBean;
 import java.util.ArrayList;
 
 import uk.co.senab.photoview.PhotoView;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * Created by wenmingvs on 2016/1/14.
@@ -192,7 +204,7 @@ public class OneFragment extends Fragment {
         String content = "据台湾“中央社”报道，国民党主席朱立伦今天(18日)向中常会报告，为败选请辞党主席一职，他感谢各位中常委的指教包容，也宣布未来党务工作由副主席黄敏惠暂代，完成未来所有补选工作。";
         //实例化工具类，并且调用接口
         NotifyUtil notify2 = new NotifyUtil(mContext, 2);
-        notify2.notify_normail_moreline(pIntent, smallIcon, ticker, title, content, true, true, false);
+        notify2.notify_normal_multiline(pIntent, smallIcon, ticker, title, content, true, true, false);
         currentNotify = notify2;
     }
 
@@ -210,11 +222,11 @@ public class OneFragment extends Fragment {
         String ticker = "您有一条新通知";
         String title = "冰冰";
         ArrayList<String> messageList = new ArrayList<String>();
-        messageList.add("文明,今晚有空吗？");
+        messageList.add("Kelly,今晚有空吗？");
         messageList.add("晚上跟我一起去玩吧?");
         messageList.add("怎么不回复我？？我生气了！！");
         messageList.add("我真生气了！！！！！你听见了吗!");
-        messageList.add("文明，别不理我！！！");
+        messageList.add("Kelly，别不理我！！！");
         String content = "[" + messageList.size() + "条]" + title + ": " + messageList.get(0);
         //实例化工具类，并且调用接口
         NotifyUtil notify3 = new NotifyUtil(mContext, 3);
@@ -230,8 +242,7 @@ public class OneFragment extends Fragment {
         //设置想要展示的数据内容
         Intent intent = new Intent(mContext, OtherActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pIntent = PendingIntent.getActivity(mContext,
-                requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pIntent = PendingIntent.getActivity(mContext, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         int smallIcon = R.drawable.xc_smaillicon;
         int largePic = R.drawable.screenshot;
         String ticker = "您有一条新通知";
@@ -241,6 +252,69 @@ public class OneFragment extends Fragment {
         NotifyUtil notify4 = new NotifyUtil(mContext, 4);
         notify4.notify_bigPic(pIntent, smallIcon, ticker, title, content, largePic, true, true, false);
         currentNotify = notify4;
+    }
+
+    /**
+     * 此方法可作为简单测试使用
+     */
+    private void notifyTest() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.baidu.com"));
+        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, intent, 0);
+        NotificationManager manager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+        if (manager == null)
+            return;
+        Notification notification;
+
+        if (Build.VERSION.SDK_INT >= 26) {
+            //当sdk版本大于26
+            Notification.BigPictureStyle picStyle = new Notification.BigPictureStyle();
+            final BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inScaled = true;
+            options.inSampleSize = 2;
+            Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.screenshot, options);
+            picStyle.bigPicture(bitmap);
+            picStyle.bigLargeIcon(bitmap);
+
+            String id = "channel_1";
+            String description = "143";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(id, description, importance);
+            channel.enableLights(true);
+            channel.enableVibration(true);
+            manager.createNotificationChannel(channel);
+
+            //设置字体颜色span
+            SpannableStringBuilder ssb = new SpannableStringBuilder("This is a content title");
+            ssb.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)), 0, 7, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
+            notification = new Notification.Builder(getActivity(), id)
+                    .setCategory(Notification.CATEGORY_MESSAGE)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setContentTitle(ssb)
+                    .setContentText(ssb)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true)
+                    .setStyle(picStyle)
+                    .build();
+        } else {
+            //当sdk版本小于26
+            NotificationCompat.BigPictureStyle picStyle = new NotificationCompat.BigPictureStyle();
+            final BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inScaled = true;
+            options.inSampleSize = 2;
+            Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.screenshot, options);
+            picStyle.bigPicture(bitmap);
+            picStyle.bigLargeIcon(bitmap);
+
+            notification = new NotificationCompat.Builder(getActivity())
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setContentTitle("This is content title")
+                    .setContentText("This is content text")
+                    .setContentIntent(pendingIntent)
+                    .setStyle(picStyle)
+                    .build();
+        }
+        manager.notify(1, notification);
     }
 
 
@@ -330,7 +404,7 @@ public class OneFragment extends Fragment {
         int largeIcon = R.drawable.fbb_largeicon;
         String ticker = "您有一条新通知";
         String title = "范冰冰";
-        String content = "文明，今晚在希尔顿酒店2016号房哈";
+        String content = "Kelly，今晚在希尔顿酒店2019号房哈";
         Intent intent = new Intent(mContext, OtherActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(mContext,

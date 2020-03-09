@@ -12,6 +12,7 @@ import com.wenming.notify.R;
 import com.wenming.notify.adapter.ViewPagerAdapter;
 import com.wenming.notify.fragment.OneFragment;
 import com.wenming.notify.fragment.ProfileFragment;
+import com.wenming.notify.fragment.TwoFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new OneFragment(mContext), getString(R.string.tab2));
+        adapter.addFragment(new TwoFragment(), getString(R.string.tab4));
         adapter.addFragment(new ProfileFragment(), getString(R.string.tab3));
         viewPager.setAdapter(adapter);
         tabLayout = (TabLayout) findViewById(R.id.tabs);

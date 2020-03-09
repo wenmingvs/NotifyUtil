@@ -39,7 +39,7 @@ public class ProfileFragment extends Fragment {
     private void initWebView() {
         if (Features.showProfile) {
             mContentWv.getSettings().setJavaScriptEnabled(true);
-            mContentWv.loadUrl("https://github.com/wenmingvs");
+            mContentWv.loadUrl("https://github.com/zongkaili/NotifyUtil");
             mContentWv.setWebViewClient(new WebViewClient() {
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {

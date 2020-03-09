@@ -108,11 +108,11 @@
         String ticker = "您有一条新通知";
         String title = "冰冰";
         ArrayList<String> messageList = new ArrayList<String>();
-        messageList.add("文明,今晚有空吗？");
+        messageList.add("Kelly,今晚有空吗？");
         messageList.add("晚上跟我一起去玩吧?");
-        messageList.add("怎么不回复我？？我生气了！！");
+        messageList.add("怎么不回复我？我生气了！！");
         messageList.add("我真生气了！！！！！你听见了吗!");
-        messageList.add("文明，别不理我！！！");
+        messageList.add("Kelly，别不理我！！！");
         String content = "[" + messageList.size() + "条]" + title + ": " + messageList.get(0);
         //实例化工具类，并且调用接口
         NotifyUtil notify3 = new NotifyUtil(mContext, 3);
@@ -262,7 +262,7 @@
         int largeIcon = R.drawable.fbb_largeicon;
         String ticker = "您有一条新通知";
         String title = "范冰冰";
-        String content = "文明，今晚在希尔顿酒店2016号房哈";
+        String content = "kelly，今晚在希尔顿酒店2016号房哈";
         Intent intent = new Intent(mContext, OtherActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(mContext,

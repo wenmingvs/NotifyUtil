@@ -3,6 +3,7 @@ package com.wenming.library;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -24,7 +25,7 @@ public class NotifyUtil {
     private int NOTIFICATION_ID;
     private NotificationManager nm;
     private Notification notification;
-    private NotificationCompat.Builder cBuilder;
+    private Notification.Builder cBuilder;
     private Notification.Builder nBuilder;
     private Context mContext;
 
@@ -33,9 +34,21 @@ public class NotifyUtil {
         this.NOTIFICATION_ID = ID;
         mContext = context;
         // 获取系统服务来初始化对象
-        nm = (NotificationManager) mContext
-                .getSystemService(Activity.NOTIFICATION_SERVICE);
-        cBuilder = new NotificationCompat.Builder(mContext);
+        nm = (NotificationManager) mContext.getSystemService(Activity.NOTIFICATION_SERVICE);
+        cBuilder = new Notification.Builder(mContext);
+
+        if (Build.VERSION.SDK_INT >= 26) {
+            //当sdk版本大于26
+            String id = "channel_1";
+            String description = "143";
+            int importance = NotificationManager.IMPORTANCE_LOW;
+            NotificationChannel channel = new NotificationChannel(id, description, importance);
+            channel.enableLights(true);
+            channel.enableVibration(true);
+            nm.createNotificationChannel(channel);
+            cBuilder = new Notification.Builder(mContext, id);
+            cBuilder.setCategory(Notification.CATEGORY_MESSAGE);
+        }
     }
 
     /**
@@ -62,25 +75,25 @@ public class NotifyUtil {
         cBuilder.setContentText(content);// 设置通知中心中的内容
         cBuilder.setWhen(System.currentTimeMillis());
 
-		/*
+        /*
          * 将AutoCancel设为true后，当你点击通知栏的notification后，它会自动被取消消失,
-		 * 不设置的话点击消息后也不清除，但可以滑动删除
-		 */
+         * 不设置的话点击消息后也不清除，但可以滑动删除
+         */
         cBuilder.setAutoCancel(true);
         // 将Ongoing设为true 那么notification将不能滑动删除
         // notifyBuilder.setOngoing(true);
         /*
          * 从Android4.1开始，可以通过以下方法，设置notification的优先级，
-		 * 优先级越高的，通知排的越靠前，优先级低的，不会在手机最顶部的状态栏显示图标
-		 */
-        cBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
+         * 优先级越高的，通知排的越靠前，优先级低的，不会在手机最顶部的状态栏显示图标
+         */
+        cBuilder.setPriority(Notification.PRIORITY_MAX);
         /*
          * Notification.DEFAULT_ALL：铃声、闪光、震动均系统默认。
-		 * Notification.DEFAULT_SOUND：系统默认铃声。
-		 * Notification.DEFAULT_VIBRATE：系统默认震动。
-		 * Notification.DEFAULT_LIGHTS：系统默认闪光。
-		 * notifyBuilder.setDefaults(Notification.DEFAULT_ALL);
-		 */
+         * Notification.DEFAULT_SOUND：系统默认铃声。
+         * Notification.DEFAULT_VIBRATE：系统默认震动。
+         * Notification.DEFAULT_LIGHTS：系统默认闪光。
+         * notifyBuilder.setDefaults(Notification.DEFAULT_ALL);
+         */
         int defaults = 0;
 
         if (sound) {
@@ -116,7 +129,7 @@ public class NotifyUtil {
 
         nBuilder.setTicker(ticker);
         nBuilder.setWhen(System.currentTimeMillis());
-        nBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
+        nBuilder.setPriority(Notification.PRIORITY_MAX);
 
         int defaults = 0;
 
@@ -176,7 +189,6 @@ public class NotifyUtil {
          PendingIntent deletePendingIntent = PendingIntent.getService(mContext,
          deleteCode, deleteIntent, PendingIntent.FLAG_UPDATE_CURRENT);
          cBuilder.setDeleteIntent(deletePendingIntent);
-
          **/
 
         Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), largeIcon);
@@ -189,7 +201,7 @@ public class NotifyUtil {
 
         // 设置通知样式为收件箱样式,在通知中心中两指往外拉动，就能出线更多内容，但是很少见
         //cBuilder.setNumber(messageList.size());
-        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+        Notification.InboxStyle inboxStyle = new Notification.InboxStyle();
         for (String msg : messageList) {
             inboxStyle.addLine(msg);
         }
@@ -226,7 +238,7 @@ public class NotifyUtil {
      * @param title
      * @param content
      */
-    public void notify_normail_moreline(PendingIntent pendingIntent, int smallIcon, String ticker,
+    public void notify_normal_multiline(PendingIntent pendingIntent, int smallIcon, String ticker,
                                         String title, String content, boolean sound, boolean vibrate, boolean lights) {
 
         final int sdk = Build.VERSION.SDK_INT;
@@ -234,11 +246,8 @@ public class NotifyUtil {
             notify_normal_singline(pendingIntent, smallIcon, ticker, title, content, sound, vibrate, lights);
             Toast.makeText(mContext, "您的手机低于Android 4.1.2，不支持多行通知显示！！", Toast.LENGTH_SHORT).show();
         } else {
-            setBuilder(pendingIntent, smallIcon, ticker, true, true, false);
-            nBuilder.setContentTitle(title);
-            nBuilder.setContentText(content);
-            nBuilder.setPriority(Notification.PRIORITY_HIGH);
-            notification = new Notification.BigTextStyle(nBuilder).bigText(content).build();
+            setCompatBuilder(pendingIntent, smallIcon, ticker, title, content, sound, vibrate, lights);
+            notification = new Notification.BigTextStyle(cBuilder).bigText(content).build();
             // 发送该通知
             nm.notify(NOTIFICATION_ID, notification);
         }
@@ -259,8 +268,8 @@ public class NotifyUtil {
         setCompatBuilder(pendingIntent, smallIcon, ticker, title, content, sound, vibrate, lights);
         /*
          * 因为进度条要实时更新通知栏也就说要不断的发送新的提示，所以这里不建议开启通知声音。
-		 * 这里是作为范例，给大家讲解下原理。所以发送通知后会听到多次的通知声音。
-		 */
+         * 这里是作为范例，给大家讲解下原理。所以发送通知后会听到多次的通知声音。
+         */
 
         new Thread(new Runnable() {
             @Override
@@ -295,14 +304,12 @@ public class NotifyUtil {
      */
     public void notify_bigPic(PendingIntent pendingIntent, int smallIcon, String ticker,
                               String title, String content, int bigPic, boolean sound, boolean vibrate, boolean lights) {
-
         setCompatBuilder(pendingIntent, smallIcon, ticker, title, null, sound, vibrate, lights);
-        NotificationCompat.BigPictureStyle picStyle = new NotificationCompat.BigPictureStyle();
+        Notification.BigPictureStyle picStyle = new Notification.BigPictureStyle();
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = true;
         options.inSampleSize = 2;
-        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(),
-                bigPic, options);
+        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), bigPic, options);
         picStyle.bigPicture(bitmap);
         picStyle.bigLargeIcon(bitmap);
         cBuilder.setContentText(content);
